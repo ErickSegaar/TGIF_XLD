@@ -22,25 +22,25 @@ Follow [these](https://www.maketecheasier.com/import-export-ova-files-in-virtual
 
 ### Credentials
 * VM 
-    * User: root
-    * Password: devoteam2019
+    * User: `root`
+    * Password: `devoteam2019`
 * XL-Deploy/XL-Release:
-    * User: Admin
-    * Password: devoteam2019
+    * User: `admin`
+    * Password: `devoteam2019`
 
 ### URLs
 * Tomcat: http://localhost:8080
 * XL-Deploy: http://localhost:4516
 * XL-Release: http://localhost:5516
-* SSH VM: localhost:22
-* Docker Ip\*: 172.17.0.1
+* SSH VM: `localhost:22`
+* Docker Ip\*: `172.17.0.1`
 
 \*The "Docker Ip" is used to connect the containers and Tomcat over the network.
 
 ## 4. Start VM and its applications
-1. Start the VM
-1. Login to the VM using VirtualBox or a SSH Terminal (Check the **[Credentials](#credentials)** chapter above)
-1. Execute the following command to get the "CONTAINER ID"s to start XL-Deploy and XL-Release in the next step:  
+1. Start the VM with VirtualBox
+1. Login to the VM using VirtualBox or a SSH Terminal (Check the **[Credentials](#credentials)** chapter above for username and password)
+1. Execute the following command to get the `CONTAINER ID`s to start `XL-Deploy` and `XL-Release` in the next step:  
 `docker ps -a`  
 ![alt text](./Images/StartContainers.png)
 1. Start both containers using the following command:  
@@ -58,8 +58,8 @@ We going to the following:
 1. First Deployment of `PetClinic`
 1. Rollback a version of `PetClinic`
 
-##### Application
-Import the `PetClinic` application, so you can deploy it.
+##### Import PetClinic
+Import the `PetClinic` application, so you can deploy it later.
 1. Login to [XL-Deploy](http://localhost:4516)
 1. Click on the `...` next to `Applications`, then go to `Import` > `From XL Deploy Server`
 1. Select `PetClinic-war/1.0` and click `Import`
@@ -81,7 +81,7 @@ We'll start by defining the target host first:
     * Password: `devoteam2019`
 1. Click on `Save and close`
 1. Click on the `...` next to `TomcatHost`, then go to `Check connection`
-1. Click on `Execute` to verify the connection to our `Tomcat` host. If the verify is successful, click on `Finish`
+1. Click on `Execute` to verify the connection to the `Tomcat` host. If verification is successful, click on `Finish`
 
 Now we're going to define the Tomcat instance, so XL-Deploy knows where the `Tomcat` is installed on the target host.
 1. Click on the `...` next to `TomcatHost`, then go to `New` > `tomcat` > `Server`
@@ -92,7 +92,7 @@ Now we're going to define the Tomcat instance, so XL-Deploy knows where the `Tom
     * Stop Command: `/usr/local/tomcat/apache-tomcat-9.0.17/bin/shutdown.sh`
 1. Click on `Save and close`
 
-Last step in the infrastructure is to define where the applications need to be deployed.
+Last step in the infrastructure is to define where `PetClinic` needs to be deployed.
 1. Click on the `...` next to `TomcatInstance`, then go to `New` > `tomcat` > `VirtualHost`
 1. Fill in the following:
     * Name: `TomcatPetClinic`
@@ -127,14 +127,14 @@ Finally we can deploy.
 1. Go back to `XL-Deploy` and click on `Finish`. This will tell XL-Deploy you accept this deployment. 
 
 #### Rollback
-What if you just deployed a version of `PetClinic` in production, but you want to revert after browsing or testing? Here we going to do just that.
+What if you just deployed a version of `PetClinic` in production, but you don't want to accept that version and instead revert to the previous version? Here we going to do just that.
 
 1. In `XL-Deploy` click on the big `Start a deployment` button in the center:  
 ![alt text](./Images/XLD_StartDeployment.png)
 1. Drag and drop the following:
     * `Applications/PetClinic-war/2.0` to `Drag and drop package here`
     * `Environments/Production` to `Drag and drop environment here`
-1. Click on `Preview` and you can see that a task called `Destroy petclinic on TomcatPetClinic` has been added.
+1. Click on `Preview` and you can see that a task called `Destroy petclinic on TomcatPetClinic` has been added
 1. Click on `Close preview` to return to the previous view
 1. Click on `Deploy` and `PetClinic` should be deployed in seconds. 
 1. Go to [PetClinic](http://localhost:8080/petclinic/). You see that the image on the homepage has been changed (if not: refresh the page):  
