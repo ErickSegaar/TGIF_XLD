@@ -1,11 +1,16 @@
+*Missing project description in github*
+
 # Devoteam XL-Deploy/XL-Release KISS
 
 This session will go through the basics of XL-Deploy and XL-Release. We'll use a Tomcat server to deploy the application. XL-Deploy, XL-Release and Tomcat are installed on a Alpine Linux VM using VirtualBox. 
+
+*Missing the explaination why we want to use tools like xl-release/deploy. Also calrify what we are deploying, or if the artifacts don't matter why.*
 
 ## 1. Pre-requisites
 
 * [Oracle VM VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * Internet Browser, like Chrome, Firefox or Edge
+* optional you can use a ssh terminal like [putty](https://www.putty.org/). Because you won't like the scaling of the virtualbox window :)
 
 That's it! :) You can use a SSH Terminal like Putty to login to the VM, if you prefer it over using VirtualBox itself.
 
@@ -19,6 +24,8 @@ Alpine hosts all applications used in this session. Tomcat is installed on the V
 
 ### Import VM as Appliance
 Follow [these](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/) instructions to import the VM as an appliance(*.ova).
+
+*give a summary of the settings used eg. amount of memory. Just a short of the entire article. Or just set defaults* 
 
 ### Credentials
 * VM 
@@ -39,7 +46,7 @@ Follow [these](https://www.maketecheasier.com/import-export-ova-files-in-virtual
 
 ## 4. Start VM and its applications
 1. Start the VM with VirtualBox
-1. Login to the VM using VirtualBox or a SSH Terminal (Check the **[Credentials](#credentials)** chapter above for username and password)
+1. Login to the VM using VirtualBox or a SSH Terminal (Check the **[Credentials](#credentials)** paragraph above for username and password)
 1. Execute the following command to get the `CONTAINER ID`s to start `XL-Deploy` and `XL-Release` in the next step:  
 `docker ps -a`  
 ![alt text](./Images/StartContainers.png)
@@ -50,7 +57,11 @@ Follow [these](https://www.maketecheasier.com/import-export-ova-files-in-virtual
 ## 5. Let's do it!
 Before we start, it's important to know that each entry in XL-Deploy is known as a `Configuration Item` or `CI`. So each defined application, application version, environment, host, etc is a `CI`.
 
+*Totally blue, and you smack me in the head with every entry in xl-deploy is a CI. What is an entry when do I use it.*
+
 #### XL-Deploy: First Deployment
+*What am I doing?, where. Started to execute without the awareness that the detailed steps where below*
+
 We going to the following:
 1. Import the `PetClinic` application to deploy
 1. Define the `Tomcat` infrastructure
@@ -62,10 +73,12 @@ We going to the following:
 Import the `PetClinic` application, so you can deploy it later.
 1. Login to [XL-Deploy](http://localhost:4516)
 1. Click on the `...` next to `Applications`, then go to `Import` > `From XL Deploy Server`
-1. Select `PetClinic-war/1.0` and click `Import`
+1. Select `PetClinic-war/1.0` and click `Import`, you can find it in the packages selection box.
 1. Repeat steps 2 and 3 for package `PetClinic-war/2.0`
 1. You should be able to see this:  
 ![alt text](./Images/XLD_ImportApplication.png)
+
+*What did I just do and why?*
 
 ##### Infrastructure
 We need to define the `Tomcat` infrastructure, so XL-Deploy knows where to deploy the `PetClinic` application.  
